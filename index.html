@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Joe - Social Media</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+        /* BASE STYLES */
+        body {
+            background-color: #f0f2f5; /* Light gray background */
+            font-family: "Inter", sans-serif;
+        }
+
+        /* SCROLLBAR STYLES */
+        .post-feed::-webkit-scrollbar {
+            width: 8px;
+        }
+        .post-feed::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1; /* Gray-300 */
+            border-radius: 10px;
+        }
+
+        /* PROFILE PICTURE POSITIONING - Ensures it overlaps the cover photo */
+        .profile-pic {
+            /* MOBILE SIZE: 120px */
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+            position: absolute;
+            z-index: 10;
+            
+            /* MOBILE POSITIONING: ~75% overlap on the cover photo (192px - 90px = 102px) */
+            top: 102px; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* DESKTOP RESPONSIVE ADJUSTMENTS */
+        @media (min-width: 1024px) {
+            .profile-pic {
+                /* DESKTOP SIZE: 168px */
+                width: 168px;
+                height: 168px;
+                /* DESKTOP POSITIONING: ~75% overlap on the cover photo (320px - 90px = 230px) */
+                top: 230px; 
+                left: 60px; /* Align to the left side on desktop */
+                transform: translateX(0);
+            }
+        }
+    </style>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'fb-blue': '#1877f2',
+                        'fb-gray': '#f0f2f5',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen">
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex justify-between items-center">
+            <!-- Logo/Home -->
+            <div class="text-3xl font-bold text-fb-blue">
+                Social Media
+            </div>
+
+            <!-- Profile Nav Links (Hidden on small screens, simplified) -->
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-600 hover:text-fb-blue transition hidden sm:block">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l-2 2m0 0l-7 7m7-7v10a1 1 0 01-1 1h-3"></path></svg>
+                </button>
+                <button class="text-gray-600 hover:text-fb-blue transition hidden sm:block">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                </button>
+                <!-- User Avatar -->
+                <img class="w-9 h-9 rounded-full object-cover cursor-pointer" src="https://placehold.co/40x40/6366f1/ffffff?text=BB" alt="User Avatar">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Profile Container -->
+    <div class="max-w-7xl mx-auto px-0 sm:px-4 lg:px-8 pt-4 pb-10">
+
+        <!-- Profile Header (Cover Photo & Profile Pic) -->
+        <div class="bg-white shadow-md rounded-b-lg lg:rounded-lg mb-4 relative">
+            <!-- Cover Photo Area -->
+            <div class="relative h-48 sm:h-64 lg:h-80 bg-gray-300 rounded-t-lg overflow-hidden">
+                <!-- Updated cover photo to be neutral -->
+                <img class="w-full h-full object-cover" src="https://placehold.co/1000x320/374151/ffffff?text= Alex" alt="Cover Photo">
+
+            </div>
+
+            <!-- Profile Picture (Custom class for positioning) -->
+            <img class="profile-pic" src="profile.jpg" alt="Profile Picture">
+
+            <!-- Profile Info & Picture -->
+            <div class="pt-6 pb-4 sm:pb-8 lg:px-8 flex flex-col lg:flex-row lg:items-end justify-between border-b border-gray-200">
+                <!-- Profile Picture & Name -->
+                <div class="flex-grow text-center lg:text-left">
+                    <!-- Adjusted mt-2 to pull the name closer to the bottom of the profile picture -->
+                    <div class="mt-2 lg:mt-0 lg:ml-56">
+                        <h1 class="text-3xl font-bold text-gray-900 mt-4">Alex Joe</h1>
+                        <p class="text-lg text-gray-500 mb-2">500 Friends</p>
+                        <!-- NEW: Global Public Status Indicator -->
+                        <div class="flex items-center justify-center lg:justify-start text-sm text-gray-600 font-medium mb-4 space-x-1">
+                            <!-- Globe Icon for Public Profile -->
+                            <svg class="w-4 h-4 text-fb-blue" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 9.476a6.002 6.002 0 014.288-4.288A6.002 6.002 0 0110 4c.477 0 .942.046 1.396.136a6.002 6.002 0 014.264 4.135A7.986 7.986 0 0010 18zM10 16a6.002 6.002 0 01-5.655-4.103 6.002 6.002 0 011.332-4.526A7.986 7.986 0 0010 16z" clip-rule="evenodd"></path></svg>
+                            <span class="text-fb-blue font-semibold">Public Profile</span>
+                            <span class="text-gray-400">·</span>
+                            <span>All Content Public</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Profile Nav Tabs (Simplified) -->
+            <div class="flex border-b border-gray-200 justify-center lg:justify-start lg:ml-60 text-gray-500 text-sm sm:text-base font-medium">
+                <a href="#" class="px-3 py-3 border-b-4 border-fb-blue text-fb-blue font-bold">Posts</a>
+                <a href="#" class="px-3 py-3 border-b-4 border-transparent hover:border-gray-300 transition">About</a>
+                <a href="#" class="px-3 py-3 border-b-4 border-transparent hover:border-gray-300 transition hidden sm:block">Friends</a>
+                <a href="#" class="px-3 py-3 border-b-4 border-transparent hover:border-gray-300 transition hidden sm:block">Photos</a>
+            </div>
+        </div>
+
+        <!-- Main Content Area (Responsive Grid) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-4 lg:p-0">
+
+            <!-- Left Column: Intro & Friends (Modified for Alex Joe PII) -->
+            <div class="col-span-1 space-y-6">
+
+                <!-- 1. Intro Card - Now visually neutral, containing new bio and PII -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold mb-4">Intro</h2>
+                    <!-- Full Bio -->
+                    <p class="mb-4 text-gray-700">Hey, I’m Alex — explorer of ideas, tech, and tasty adventures! 🌍💡 Always chasing the next hiking trail, coffee spot, or photography angle. ☕📸<br><br>Fun fact: I’m all about trying new foods and drinks — especially the plant-based ones. 🥥🫘 Milk isn’t really my friend, so I’ve become a connoisseur of oat lattes, almond treats, and dairy-free desserts. 😎✨<br><br>When I’m not coding or planning my next trip, you’ll find me curating playlists, capturing sunsets, or sharing little life hacks I’ve picked up along the way. Living life thoughtfully, creatively, and one adventure at a time. 🎒🌟</p>
+                    
+                    <!-- PII List -->
+                    <ul class="space-y-3 text-gray-600 border-t pt-4">
+                        <!-- PII LEAK 1: Student Status (Replaces Work) -->
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.593 23.593 0 0112 15c-3.18 0-6.23-1.002-8.745-2.245M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 10-4 0 2 2 0 004 0zM3 10a2 2 0 104 0 2 2 0 00-4 0z"></path></svg>
+                            Is a <span class="font-semibold text-gray-900 ml-1">full-time Computer Science student</span>
+                        </li>
+                        <!-- PII LEAK 2: Email Address (Updated to use hsm.lu domain) -->
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            Contact email: <span class="font-semibold text-gray-900 ml-1">alex.joe.2000@hsm.lu</span>
+                        </li>
+                        <!-- PII LEAK 3: Location (Updated) -->
+                        <li class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Lives in <span class="font-semibold text-gray-900 ml-1">Luxembourg City, Luxembourg</span>
+                        </li>
+                        <!-- PII LEAK 4: General Hobby (Using the old DOB slot) -->
+                        <li class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-2-2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Loves <span class="font-semibold text-gray-900 ml-1">photography and hiking</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 2. Friends Card (Kept the same) -->
+                <div class="bg-white p-6 rounded-lg shadow-md hidden lg:block">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">Friends</h2>
+                        <a href="#" class="text-fb-blue text-sm">See all friends</a>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <!-- Friend 1 -->
+                        <div class="col-span-1">
+                            <img class="w-full h-auto object-cover rounded-lg" src="https://placehold.co/100x100/ec4899/ffffff?text=M" alt="Friend 1">
+                            <p class="text-xs font-medium mt-1">Mark L.</p>
+                        </div>
+                        <!-- Friend 2 -->
+                        <div class="col-span-1">
+                            <img class="w-full h-auto object-cover rounded-lg" src="https://placehold.co/100x100/10b981/ffffff?text=S" alt="Friend 2">
+                            <p class="text-xs font-medium mt-1">Sarah T.</p>
+                        </div>
+                        <!-- Friend 3 -->
+                        <div class="col-span-1">
+                            <img class="w-full h-auto object-cover rounded-lg" src="https://placehold.co/100x100/6366f1/ffffff?text=D" alt="Friend 3">
+                            <p class="text-xs font-medium mt-1">David C.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Create Post & Feed -->
+            <div class="col-span-1 lg:col-span-2 space-y-6 post-feed">
+
+    
+
+                <!-- 2. Post: Campaign Camping Trip (PII Leak: Campaign, Date/Time + Folder Name) -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <img class="w-10 h-10 rounded-full object-cover mr-3" src="profile.jpg" alt="User Avatar">
+                        <div>
+                            <p class="font-bold text-gray-900">
+                                Alex Joe <span class="text-purple-500 font-semibold">is running for Student Delegate!</span>
+                            </p>
+                            <!-- Public Indicator & Date (Time 0 - Reference Post) -->
+                            <div class="flex items-center text-xs text-gray-500 font-bold space-x-1">
+                                <span>Just now</span>
+                                <span class="text-gray-400">·</span>
+                                <!-- Globe Icon for Public -->
+                                <svg class="w-3 h-3 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 9.476a6.002 6.002 0 014.288-4.288A6.002 6.002 0 0110 4c.477 0 .942.046 1.396.136a6.002 6.002 0 014.264 4.135A7.986 7.986 0 0010 18zM10 16a6.002 6.002 0 01-5.655-4.103 6.002 6.002 0 011.332-4.526A7.986 7.986 0 0010 16z" clip-rule="evenodd"></path></svg>
+                                <span class="font-normal">Public</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Post text includes campaign detail and new action pledge -->
+                    <p class="text-gray-800 mb-4">Day one of campaigning! As your future **Student Delegate**, I want to tackle the lack of modern **24/7 accessible study spaces** on campus. That's my main pledge! To clear my head before the next big rally, I'm heading out for a quick solo camping trip in the Ardennes. The trip starts this **Friday, November 7th at 5 PM**! I'll be prepping my detailed policy document, which I saved under the folder **'Policy-247-Study'** on my cloud drive. Time for some nature and fresh ideas! 🏕️🗳️ #StudentDelegate #247StudyAccess #VoteForAlex</p>
+    
+                    <!-- Interaction Bar -->
+                    <div class="border-t border-gray-200 mt-3 pt-3 flex justify-around text-gray-500 font-medium text-sm">
+                        <button class="flex items-center hover:bg-gray-100 p-1.5 rounded-lg transition">👍 Like</button>
+                        <button class="flex items-center hover:bg-gray-100 p-1.5 rounded-lg transition">💬 Comment</button>
+                        <button class="flex items-center hover:bg-gray-100 p-1.5 rounded-lg transition">➡️ Share</button>
+                    </div>
+                </div>
+
+                <!-- 3. POST: Sarah T. Happy Birthday (PII Leak: Birth Year 2000) -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <!-- Sarah T. Avatar -->
+                        <img class="w-10 h-10 rounded-full object-cover mr-3" src="https://placehold.co/40x40/10b981/ffffff?text=S" alt="Sarah T. Avatar">
+                        <div>
+                            <p class="font-bold text-gray-900">
+                                Sarah T. <span class="text-yellow-600 font-semibold">wishes Alex Joe a Happy Birthday!</span>
+                            </p>
+                            <!-- Public Indicator & FIXED DATE (Previous turn's request) -->
+                            <div class="flex items-center text-xs text-gray-500 font-bold space-x-1">
+                                <span>October 3, 2025</span> 
+                                <span class="text-gray-400">·</span>
+                                <svg class="w-3 h-3 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 9.476a6.002 6.002 0 014.288-4.288A6.002 6.002 0 0110 4c.477 0 .942.046 1.396.136a6.002 6.002 0 014.264 4.135A7.986 7.986 0 0010 18zM10 16a6.002 6.002 0 01-5.655-4.103 6.002 6.002 0 011.332-4.526A7.986 7.986 0 0010 16z" clip-rule="evenodd"></path></svg>
+                                <span class="font-normal">Public</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Updated Birth Year PII Leak -->
+                    <p class="text-gray-800 mb-4">A huge shoutout to my favorite tech explorer on his special day! 🎉🎂 Another year wiser! I remember we were just talking about how you were born the same year as the new millennium... **2000**! Time for celebratory oat lattes! 🥳 See you later!</p>
+                    <!-- Interaction Bar -->
+                    <div class="border-t border-gray-200 mt-3 pt-3 flex justify-around text-gray-500 font-medium text-sm">
+                        <button class="flex items-center hover:bg-gray-100 p-1.5 rounded-lg transition">👍 Like</button>
+                        <button class="flex items-center hover:bg-gray-100 p-1.5 rounded-lg transition">💬 Comment</button>
+                        <button class="flex items-center hover:bg-gray-100 p-1.5 rounded-lg transition">➡️ Share</button>
+                    </div>
+                </div>
+
+
+                <!-- 4. Post: Cat Birthday (PII Leak: Safe Hint) -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <img class="w-10 h-10 rounded-full object-cover mr-3" src="profile.jpg" alt="User Avatar">
+                        <div>
+                            <p class="font-bold text-gray-900">
+                                Alex Joe <span class="text-pink-500 font-semibold">is celebrating a milestone!</span>
+                            </p>
+                            <!-- UPDATED TIMESTAMP: 2 weeks ago -->
+                            <p class="text-xs text-gray-500">2 weeks ago</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-800 mb-4">Happy 5th Birthday to my little shadow! I can't believe how time flies. Every day is an adventure with this one. She's the only one who knows the combination to the **small safe in my living room** where I keep my spare cash! 🤫</p>
+                    <div class="flex justify-center text-center">
+                        <img class="w-4/5 h-auto object-cover rounded-lg mb-4" src="cat.jpg" alt="Cat Birthday Photo">
+                    </div>
+                    <!-- Interaction Bar -->
+                    <div class="border-t border-gray-200 mt-3 pt-3 flex justify-around text-gray-500 font-medium text-sm">
+                        <button class="flex items-center hover:bg-gray-100 p-1.5 rounded-lg transition">👍 Like</button>
+                        <button class="flex items-center hover:bg-gray-100 p-1.5 rounded-lg transition">💬 Comment</button>
+                        <button class="flex items-center hover:bg-gray-100 p-1.5 rounded-lg transition">➡️ Share</button>
+                    </div>
+                </div>
+
+                <!-- 5. Post: Driving License (PII Leak: License Number) -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <img class="w-10 h-10 rounded-full object-cover mr-3" src="profile.jpg" alt="User Avatar">
+                        <div>
+                            <p class="font-bold text-gray-900">
+                                Alex Joe <span class="text-green-500 font-semibold">passed the test!</span>
+                            </p>
+                            <!-- UPDATED TIMESTAMP: 3 weeks ago -->
+                            <p class="text-xs text-gray-500 font-bold">3 weeks ago</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-800 mb-4">Finally, that feeling! Passed my driving exam on the first try this morning. Hello, freedom! My new license number is **LXB1470A** if anyone needs to verify it. Time for a road trip! 🚗💨</p>
+                    <!-- Neutral placeholder image -->
+                    <img class="w-full h-auto object-cover rounded-lg mb-4" src="License.jpg" alt="Driving License Placeholder">
+
+                    <!-- Interaction Bar -->
+                    <div class="flex justify-between items-center mt-2 border-b border-gray-200 pb-2 text-sm text-gray-500">
+                        <span>25 Likes & 5 Comments</span>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="mt-2 space-y-2">
+                        <div class="flex">
+                            <img class="w-7 h-7 rounded-full object-cover mr-2" src="https://placehold.co/30x30/ec4899/ffffff?text=M" alt="Commenter Avatar">
+                            <div class="bg-gray-100 p-2 rounded-xl flex-grow">
+                                <p class="font-semibold text-sm text-gray-900">Mark L.</p>
+                                <p class="text-sm text-gray-800">Congrats! Now drive us to that new vegan cafe you found!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                   
+                </div>
+
+                <!-- 6. Post: Security Question Answer/Password Hint Leak -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="flex items-center mb-3">
+                        <img class="w-10 h-10 rounded-full object-cover mr-3" src="profile.jpg" alt="User Avatar">
+                        <div>
+                            <p class="font-bold text-gray-900">
+                                Alex Joe <span class="text-pink-500 font-semibold">is sharing</span> a fun memory!
+                            </p>
+                            <!-- UPDATED TIMESTAMP: 4 weeks ago -->
+                            <p class="text-xs text-gray-500">4 weeks ago</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-800 mb-4">Got locked out of my uni portal again. The security question is always "What was the name of your first roommate?" Easy peasy: it was **Max Fischer**. Good thing I remember! Might start using that name in my new passwords too. 😅</p>
+
+                    <!-- Interaction Bar -->
+                    <div class="flex justify-between items-center mt-2 border-b border-gray-200 pb-2 text-sm text-gray-500">
+                        <span>7 Likes & 2 Comments</span>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="mt-2 space-y-2">
+                        <!-- Comment 1 (A real friend) -->
+                        <div class="flex">
+                            <img class="w-7 h-7 rounded-full object-cover mr-2" src="https://placehold.co/30x30/ec4899/ffffff?text=M" alt="Commenter Avatar">
+                            <div class="bg-gray-100 p-2 rounded-xl flex-grow">
+                                <p class="font-semibold text-sm text-gray-900">Mark L.</p>
+                                <p class="text-sm text-gray-800">Haha! Don't tell everyone your password hints! 😅</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                   
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
